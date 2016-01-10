@@ -1,0 +1,32 @@
+{
+  "name": "xcatalog",
+  "version": "0.0.0",
+  "description": "Dependency injection container for JavaScript",
+  "main": "catalog.js",
+  "scripts": {
+    "preversion": "npm test",
+    "test": "mocha tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorherraiz/xcatalog.git"
+  },
+  "keywords": [
+    "di",
+    "dependency",
+    "injection",
+    "IoC",
+    "JavaScript",
+    "nodejs"
+  ],
+  "author": "Víctor Herraiz Posada <victor.herraiz@gmail.com> (https://github.com/victorherraiz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/victorherraiz/xcatalog/issues"
+  },
+  "homepage": "https://github.com/victorherraiz/xcatalog#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  }
+}
