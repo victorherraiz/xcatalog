@@ -1,6 +1,6 @@
 {
   "name": "xcatalog",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Dependency injection container for JavaScript",
   "main": "catalog.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/victorherraiz/xcatalog.git"
   },
-  "engines" : {
-    "node" : ">=4.0.0"
+  "engines": {
+    "node": ">=4.0.0"
   },
   "keywords": [
     "di",
