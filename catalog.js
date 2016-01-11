@@ -39,7 +39,7 @@ catalog.set = function (id, type, ref, dep) {
 };
 
 catalog.load = function (ref) {
-    const conf = ref && ref.$catalog;
+    const conf = ref && ref.$xcatalog;
     if (!conf || !conf.id || !conf.type) {
         throw new TypeError("Missing $catalog annotation");
     }
