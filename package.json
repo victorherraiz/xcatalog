@@ -2,7 +2,7 @@
   "name": "xcatalog",
   "version": "0.2.0",
   "description": "Dependency injection container for JavaScript",
-  "main": "catalog.js",
+  "main": "index.js",
   "scripts": {
     "preversion": "npm test",
     "test": "node tests.js",
