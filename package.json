@@ -5,7 +5,8 @@
   "main": "catalog.js",
   "scripts": {
     "preversion": "npm test",
-    "test": "node tests.js"
+    "test": "node tests.js",
+    "examples": "node examples/example01.js && node examples/example02.js && node examples/example03.js"
   },
   "repository": {
     "type": "git",

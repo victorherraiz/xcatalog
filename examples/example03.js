@@ -23,7 +23,7 @@ xcatalog.set("value02", "constant", promiseValue);
 
 xcatalog.set("a", "singleton", A, ["value01", "value02"]);
 
-xcatalog.ready().then(function (xcatalog) {
+xcatalog.ready().then(function () {
 	console.log(xcatalog("value01")); // "BANANA"
 	console.log(xcatalog("value02")); // "BANANA"
 	console.log(xcatalog("a").ok); // true

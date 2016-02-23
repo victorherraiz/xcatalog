@@ -52,7 +52,17 @@ assert.strictEqual(xcatalog("d").b, xcatalog("b"));
 assert.strictEqual(xcatalog("d").c, xcatalog("c"));
 
 
-//TEST anotations
+// sustitution
+
+xcatalog.set("sustitution", "constant", "ORANGE");
+xcatalog.set("sustitution", "constant", "PINK");
+assert.strictEqual(xcatalog("sustitution"), "PINK");
+assert.throws(() =>
+    { xcatalog.set("sustitution", "constant", "RED"); },
+    TypeError);
+assert.strictEqual(xcatalog("sustitution"), "PINK");
+
+// anotations
 
 class AD {
     constructor () {
@@ -75,15 +85,16 @@ xcatalog.load(AD).load(BD);
 assert.throws(function () { xcatalog.load(A); }, TypeError);
 assert.strictEqual(xcatalog("bd").foo, "BANANA");
 
-
 //TEST Promises
 
 xcatalog.set("P", "constant", Promise.resolve("BANANA"));
 xcatalog.set("PF", "factory", (value) => value, ["P"]);
 
-assert.throws(function () { xcatalog.load("PF"); }, TypeError);
+//No definition for P yet, it is a promise
+assert.throws(function () { xcatalog("P"); }, TypeError);
+assert.throws(function () { xcatalog("PF"); }, TypeError);
 
-const promise = xcatalog.ready().then(function (xcatalog) {
+const promise = xcatalog.ready().then(function () {
     assert.strictEqual(xcatalog("PF"), "BANANA");
 });
 
@@ -93,4 +104,6 @@ Promise.all([promise]).then(function () {
     console.error(reason);
     process.exit(1);
 })
+
+
 

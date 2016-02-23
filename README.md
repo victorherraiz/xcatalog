@@ -103,7 +103,7 @@ const promise = Promise.resolve("BANANA");
 xcatalog.set("VALUE", "constant", promise);
 
 //Get service instance already builded with dependencies
-xcatalog.ready().then(function (xcatalog) {
+xcatalog.ready().then(function () {
     console.log(xcatalog("VALUE")); // "BANANA"
 });
 

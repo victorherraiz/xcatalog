@@ -1,4 +1,10 @@
 /* eslint-env node, es6 */
+
+/**
+ * xcatalog
+ * @module xcatalog
+ */
+
 "use strict";
 
 const
@@ -23,12 +29,13 @@ function xcatalog(id) {
     if (!definition) {
         throw new TypeError("No definition for: " + id);
     }
-    if (definition.fac) {
-        return definition.fac();
+    if (!definition.fac) {
+        definition.fac = build(definition, definition.dep.map(xcatalog));
     }
-    definition.fac = build(definition, definition.dep.map(xcatalog));
     return definition.fac();
 }
+
+
 
 /**
  * Store a reference into the xcatalog
@@ -38,14 +45,20 @@ function xcatalog(id) {
  * @param {array} dep - id array of dependencies.
  */
 xcatalog.set = function (id, type, ref, dep) {
+    const old = definitions.get(id);
+    if (old && old.fac) {
+        throw new TypeError(id + " is already build");
+    }
+
     if (ref && typeof ref.then === "function") {
         promises.push(ref);
         ref.then(function (value) {
-            xcatalog.set(id, type, value, dep);
+            definitions.set(id, { type, ref: value, dep: dep || [], fac: null });
         });
     } else {
-        definitions.set(id, { id: id, type: type, ref: ref, dep: dep || [], fac: null });
+        definitions.set(id, { type, ref, dep: dep || [], fac: null });
     }
+
     return xcatalog;
 };
 
@@ -62,9 +75,7 @@ xcatalog.load = function (ref) {
 };
 
 xcatalog.ready = function () {
-    return Promise.all(promises).then(function () {
-        return xcatalog;
-    });
+    return Promise.all(promises).then(() => {});
 };
 
 xcatalog.size = function () {
