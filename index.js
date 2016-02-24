@@ -75,7 +75,7 @@ xcatalog.load = function (ref) {
 };
 
 xcatalog.ready = function () {
-    return Promise.all(promises).then(() => {});
+    return Promise.all(promises).then(() => xcatalog);
 };
 
 xcatalog.size = function () {
