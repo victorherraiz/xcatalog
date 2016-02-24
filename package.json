@@ -1,6 +1,6 @@
 {
   "name": "xcatalog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dependency injection container for JavaScript",
   "main": "index.js",
   "scripts": {
