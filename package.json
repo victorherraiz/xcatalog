@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preversion": "npm test",
-    "test": "node tests.js",
+    "test": "node tests/basic.js && node tests/dirload.js",
     "examples": "node examples/example01.js && node examples/example02.js && node examples/example03.js"
   },
   "repository": {

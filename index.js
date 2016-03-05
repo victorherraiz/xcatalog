@@ -7,7 +7,8 @@
 
 "use strict";
 
-const
+const fs = require("fs"),
+    path = require("path"),
     definitions = new Map(),
     factories = new Map(),
     promises = [];
@@ -53,6 +54,7 @@ xcatalog.set = function (id, type, ref, dep) {
     if (ref && typeof ref.then === "function") {
         promises.push(ref);
         ref.then(function (value) {
+            // TODO check if fac is aready set and throw in that case
             definitions.set(id, { type, ref: value, dep: dep || [], fac: null });
         });
     } else {
@@ -74,8 +76,24 @@ xcatalog.load = function (ref) {
     return xcatalog.set(conf.id, conf.type, ref, conf.inject);
 };
 
+xcatalog.loaddir = function loadDirSync(dir) {
+    fs.readdirSync(dir).forEach((file) => {
+        const apath = path.join(dir, file),
+            stat = fs.statSync(apath);
+        if (stat.isDirectory()) {
+            loadDirSync(apath);
+        } else if (apath.endsWith(".js")) {
+            const ref = require(apath);
+            if (ref.$xcatalog) {
+                xcatalog.load(ref);
+            }
+        }
+    });
+    return xcatalog;
+};
+
 xcatalog.ready = function () {
-    return Promise.all(promises).then(() => xcatalog);
+    return Promise.all(promises).then((values) => xcatalog);
 };
 
 xcatalog.size = function () {

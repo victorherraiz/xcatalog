@@ -76,6 +76,13 @@ console.log(xcatalog("b").bar); // "BANANA"
 
 ```
 
+### Load directories
+
+Use `xcatalog.loaddir(path)` to load all resouces with `$catalog` annotation in the given `path`.
+
+This function will `require` every `.js` file in the `path` and sub directories.
+
+
 Getting instances
 -----------------
 
@@ -93,7 +100,7 @@ Dealing with Promises
 
 If any reference returns a promise the `xcatalog` cannot be used until is ready.
 
-`xcatalog.ready()` returns a promise, when that promise is fulfilled the xcatalog is fully available.
+`xcatalog.ready()` returns a promise, that promise is fulfilled when the xcatalog is fully available or rejected is any pending promise es rejected.
 
 ```js
 "use strict";

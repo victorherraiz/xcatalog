@@ -2,7 +2,7 @@
 
 const
     assert = require("assert"),
-    xcatalog = require(".");
+    xcatalog = require("..");
 
 class A {
     foo () {
@@ -98,12 +98,11 @@ const promise = xcatalog.ready().then(function () {
     assert.strictEqual(xcatalog("PF"), "BANANA");
 });
 
+//TEST End
 Promise.all([promise]).then(function () {
     console.log("OK!");
+    process.exit(0);
 }, function (reason) {
     console.error(reason);
     process.exit(1);
-})
-
-
-
+});
