@@ -92,8 +92,13 @@ xcatalog.loaddir = function loadDirSync(dir) {
     return xcatalog;
 };
 
-xcatalog.ready = function () {
-    return Promise.all(promises).then((values) => xcatalog);
+xcatalog.ready = function (deps, fn) {
+    return Promise.all(promises).then(() => {
+        if (fn) {
+            factories.get("factory")(fn, deps.map((dep) => xcatalog(dep)))();
+        }
+        return xcatalog;
+    });
 };
 
 xcatalog.size = function () {

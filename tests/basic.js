@@ -94,12 +94,17 @@ xcatalog.set("PF", "factory", (value) => value, ["P"]);
 assert.throws(function () { xcatalog("P"); }, TypeError);
 assert.throws(function () { xcatalog("PF"); }, TypeError);
 
-const promise = xcatalog.ready().then(function () {
+const promise01 = xcatalog.ready().then(function () {
     assert.strictEqual(xcatalog("PF"), "BANANA");
 });
 
+const promise02 = xcatalog.ready(["P", "PF"], (arg1, arg2) => {
+    assert.strictEqual(arg1, "BANANA");
+    assert.strictEqual(arg2, "BANANA");
+});
+
 //TEST End
-Promise.all([promise]).then(function () {
+Promise.all([promise01, promise02]).then(function () {
     console.log("OK!");
     process.exit(0);
 }, function (reason) {

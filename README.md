@@ -100,7 +100,7 @@ Dealing with Promises
 
 If any reference returns a promise the `xcatalog` cannot be used until is ready.
 
-`xcatalog.ready()` returns a promise, that promise is fulfilled when the xcatalog is fully available or rejected is any pending promise es rejected.
+`xcatalog.ready()` returns a promise, that promise is fulfilled when the xcatalog is fully available or rejected is any pending promise is rejected.
 
 ```js
 "use strict";
